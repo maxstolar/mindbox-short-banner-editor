@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Редактор баннеров</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="toolbar" aria-label="Настройки баннера">
+      <div class="brand-block">
+        <h1>Редактор баннеров</h1>
+        <p>1104 x 306 px</p>
+      </div>
+
+      <form class="controls" id="banner-form" autocomplete="off">
+        <div class="field">
+          <span>Шаблон</span>
+          <div class="segmented two-up" id="template-controls" aria-label="Шаблон баннера">
+            <button class="segment is-active" type="button" data-template="factoid">Фактоид</button>
+            <button class="segment" type="button" data-template="speaker">Цитата спикера</button>
+          </div>
+        </div>
+
+        <div class="field color-field">
+          <span>Цвет фона</span>
+          <div class="color-controls">
+            <input id="right-color" type="color" value="#5fc5c3">
+            <input class="color-hex-input" id="right-color-hex" type="text" value="#5FC5C3" inputmode="text" pattern="#?[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?" aria-label="HEX цвета фона" title="HEX">
+            <button class="eyedropper-button" type="button" data-eyedropper-target="right-color" aria-label="Пипетка для цвета фона" title="Пипетка">Пипетка</button>
+          </div>
+        </div>
+
+        <div class="field-stack" id="factoid-fields">
+          <label class="field">
+            <span>Текст сверху</span>
+            <textarea id="eyebrow-text" rows="2">к конверсии в заказ из рекламных
+кампаний</textarea>
+          </label>
+
+          <label class="field number-field">
+            <span>Размер верхнего текста</span>
+            <input id="eyebrow-size" type="number" min="18" max="44" step="1" value="29">
+          </label>
+
+          <div class="field">
+            <span>Цвет верхнего текста</span>
+            <div class="color-preset-group" aria-label="Цвет верхнего текста">
+              <button class="color-preset is-active" type="button" data-text-color-target="eyebrow" data-color="#FFFFFF">
+                <span class="color-swatch is-white"></span>
+                #FFFFFF
+              </button>
+              <button class="color-preset" type="button" data-text-color-target="eyebrow" data-color="#292B32">
+                <span class="color-swatch is-dark"></span>
+                #292B32
+              </button>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Результат</span>
+            <input id="metric-text" type="text" value="+0,44 п. п.">
+          </label>
+
+          <label class="field number-field">
+            <span>Размер крупного текста</span>
+            <input id="metric-size" type="number" min="54" max="128" step="1" value="111">
+          </label>
+
+          <div class="field">
+            <span>Цвет результата</span>
+            <div class="color-preset-group" aria-label="Цвет результата">
+              <button class="color-preset is-active" type="button" data-text-color-target="metric" data-color="#FFFFFF">
+                <span class="color-swatch is-white"></span>
+                #FFFFFF
+              </button>
+              <button class="color-preset" type="button" data-text-color-target="metric" data-color="#292B32">
+                <span class="color-swatch is-dark"></span>
+                #292B32
+              </button>
+            </div>
+          </div>
+
+          <div class="field library-field" id="logo-library-field" hidden>
+            <span>Логотип из библиотеки</span>
+            <div class="logo-grid" id="logo-library" aria-label="Библиотека логотипов"></div>
+          </div>
+
+          <label class="field file-field">
+            <span>Загрузить логотип</span>
+            <input id="logo-file" type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp">
+          </label>
+
+          <label class="field range-field">
+            <span>Размер логотипа</span>
+            <output id="logo-scale-value" for="logo-scale">100%</output>
+            <input id="logo-scale" type="range" min="40" max="220" step="1" value="100">
+          </label>
+
+          <label class="toggle-field" id="logo-preserve-colors-field" hidden>
+            <input id="logo-preserve-colors" type="checkbox" checked>
+            <span>Сохранить цвета SVG</span>
+          </label>
+
+          <div class="field color-field" id="logo-color-field" hidden>
+            <span>Цвет SVG-логотипа</span>
+            <div class="color-controls">
+              <input id="logo-color" type="color" value="#292b32">
+              <input class="color-hex-input" id="logo-color-hex" type="text" value="#292B32" inputmode="text" pattern="#?[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?" aria-label="HEX цвета SVG-логотипа" title="HEX">
+              <button class="eyedropper-button" type="button" data-eyedropper-target="logo-color" aria-label="Пипетка для цвета SVG-логотипа" title="Пипетка">Пипетка</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-stack" id="speaker-fields" hidden>
+          <label class="field">
+            <span>Текст цитаты справа</span>
+            <textarea id="quote-text" rows="4">«Минут десять-пятнадцать минут, пять-десять пятого четыре пять-десять пятого утра»</textarea>
+          </label>
+
+          <label class="field number-field">
+            <span>Размер текста цитаты</span>
+            <input id="quote-size" type="number" min="32" max="44" step="1" value="32">
+          </label>
+
+          <label class="field file-field">
+            <span>Фотография</span>
+            <input id="person-file" type="file" accept="image/png,image/jpeg,image/webp">
+          </label>
+
+          <label class="field range-field">
+            <span>Масштаб фотографии</span>
+            <output id="person-zoom-value" for="person-zoom">100%</output>
+            <input id="person-zoom" type="range" min="100" max="300" step="1" value="100">
+          </label>
+
+          <label class="field range-field">
+            <span>Сдвиг по горизонтали</span>
+            <output id="person-offset-x-value" for="person-offset-x">0</output>
+            <input id="person-offset-x" type="range" min="-100" max="100" step="1" value="0">
+          </label>
+
+          <label class="field range-field">
+            <span>Сдвиг по вертикали</span>
+            <output id="person-offset-y-value" for="person-offset-y">0</output>
+            <input id="person-offset-y" type="range" min="-100" max="100" step="1" value="0">
+          </label>
+
+          <label class="field">
+            <span>Имя</span>
+            <input id="person-name" type="text" value="Маргарита Громова">
+          </label>
+
+          <label class="field">
+            <span>Должность под именем</span>
+            <input id="person-title" type="text" value="CMO, Mindbox">
+          </label>
+        </div>
+
+        <div class="actions" aria-label="Действия">
+          <button class="secondary" id="reset-media" type="button">Сбросить</button>
+          <button class="primary" id="download" type="button">Скачать PNG</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="workspace" aria-label="Предпросмотр">
+      <div class="canvas-frame">
+        <canvas id="banner-canvas" width="1104" height="306" aria-label="Предпросмотр баннера"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js?v=20260520-quote-min-32"></script>
+</body>
+</html>
